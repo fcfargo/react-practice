@@ -7,7 +7,7 @@ require('dotenv').config({ path: `${__dirname}/config/.env` });
 const app = express();
 
 app.get('/health-check', (req, rest) => {
-  rest.send('ok');
+  res.send('ok');
 });
 
 passport.use(
@@ -15,13 +15,20 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'auth/google/callback',
+      callbackURL: 'http://localhost:3000/auth/google/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
       console.log(accessToken);
     }
   )
 );
+
+app.get(
+  '/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback', passport.authenticate('google'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server Listen Port ${PORT}`));
