@@ -1,10 +1,13 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 require('dotenv').config({ path: `${__dirname}/config/.env` });
+
+require('./services/passport');
+
+mongoose.connect(process.env.MONGO_URI);
 
 const app = express();
 
-require('./services/passport');
 require('./controllers/authController')(app);
 
 app.get('/health-check', (req, res) => {
