@@ -10,8 +10,16 @@ passport.use(
       callbackURL: process.env.GOOGLE_CLIENT_CALLBACK_URL,
     },
     async (accessToken, refreshToken, profile, cb) => {
-      const user = User({ googleId: profile.id });
-      await user.save();
+      const { id } = profile;
+      const user = await User.findOne({ googleId: id });
+      if (!user) {
+        const newUser = User({ googleId: id });
+        await newUser.save();
+
+        cb(null, newUser);
+      } else {
+        cb(null, user);
+      }
     }
   )
 );
