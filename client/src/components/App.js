@@ -9,23 +9,25 @@ const Landing = () => <h2>Landing</h2>;
 
 const App = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              <div>
-                <Header />
-                <Outlet />
-              </div>
-            }
-          >
-            <Route path="/" element={<Landing />} />
-            <Route path="/surveys" element={<Dashboard />} />
-            <Route path="/surveys/new" element={<SuervyNew />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <div className="container">
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                <div>
+                  <Header />
+                  <Outlet />
+                </div>
+              }
+            >
+              <Route path="/" element={<Landing />} />
+              <Route path="/surveys" element={<Dashboard />} />
+              <Route path="/surveys/new" element={<SuervyNew />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 };
