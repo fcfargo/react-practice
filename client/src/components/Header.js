@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
-    const isAuthLoggedIn = this.props.auth;
+    const isAuthLoggedIn = this.props.user;
     switch (isAuthLoggedIn) {
       case null:
         return;
@@ -26,7 +27,9 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a className="brand-logo">Emaily</a>
+          <Link to={this.props.user ? '/surveys' : '/'} className="brand-logo">
+            Emaily
+          </Link>
           <ul className="right">
             <li>
               <a>{this.renderContent()}</a>
@@ -39,7 +42,7 @@ class Header extends Component {
 }
 
 function mapStateToProps({ auth }) {
-  return { auth };
+  return { user: auth };
 }
 
 export default connect(mapStateToProps)(Header);
