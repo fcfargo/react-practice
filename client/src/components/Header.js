@@ -6,11 +6,19 @@ class Header extends Component {
     const isAuthLoggedIn = this.props.auth;
     switch (isAuthLoggedIn) {
       case null:
-        return 'Still deciding';
+        return;
       case false:
-        return 'Im Logged out';
+        return (
+          <li>
+            <a href="/auth/google">Login With Google</a>
+          </li>
+        );
       default:
-        return 'Im Logged in';
+        return (
+          <li>
+            <a href="/api/users/logout">Logout</a>
+          </li>
+        );
     }
   }
 
