@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 require('dotenv').config({ path: `${__dirname}/config/.env` });
 
@@ -20,7 +21,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(bodyParser.json());
+
 require('./controllers/authController')(app);
+require('./controllers/billingController')(app);
 
 app.get('/health-check', (req, res) => {
   res.send('ok');
