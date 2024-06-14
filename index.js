@@ -29,6 +29,6 @@ require('./controllers/billingController')(app);
 app.get('/health-check', (req, res) => {
   res.send('ok');
 });
-
+console.log(process.env.NODE_ENV);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server Listen Port ${PORT}`));
