@@ -8,14 +8,18 @@ module.exports = (app) => {
     const userId = req.user._id;
     const uniquePaymentId = token.id;
 
-    const charge = await stripe.charges.create({
+    await stripe.charges.create({
       amount: 500,
       currency: 'usd',
       description: '$5 for 5 credits',
       source: uniquePaymentId,
     });
 
-    const user = await User.findByIdAndUpdate(userId, { $inc: { credits: 5 } });
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { $inc: { credits: 5 } },
+      { new: true }
+    );
 
     res.send(user);
   });
