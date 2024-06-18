@@ -15,7 +15,7 @@ const surveySchema = new Schema(
     yes: { type: Number, default: 0 },
     no: { type: Number, default: 0 },
     userId: { type: String, required: true },
-    dataSent: { type: Date },
+    dataSent: { type: Date, default: new Date() },
     lastResponded: { type: Date },
   },
   {

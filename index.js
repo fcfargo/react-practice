@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 require('./controllers/authController')(app);
 require('./controllers/billingController')(app);
+require('./controllers/surveyController')(app);
 
 app.get('/health-check', (req, res) => {
   res.send('ok');
